@@ -6,19 +6,43 @@ import '../../../core/routes/app_routes.dart';
 class AuthController extends GetxController {
   final ApiProvider api = Get.find();
   var isLoading = false.obs;
+  var isPasswordVisible = false.obs;
+
+  void togglePasswordVisibility() {
+    isPasswordVisible.value = !isPasswordVisible.value;
+  }
 
   Future<void> login(String username, String password) async {
     isLoading.value = true;
-    final response = await api.login(username, password);
-    isLoading.value = false;
-    Get.offAllNamed(AppRoutes.home);
-    // if (response.statusCode == 200) {
-    //   final token = response.body['token'];
-    //   await StorageService.saveToken(token);
-    //   Get.offAllNamed(AppRoutes.home);
-    // } else {
-    //   Get.snackbar("Error", "Login failed");
-    // }
+
+    try {
+      // TODO: Add your actual API call here
+      // final response = await api.post('/login', {
+      //   'username': username,
+      //   'password': password,
+      // });
+
+      // Simulate API call for now
+      await Future.delayed(Duration(seconds: 1));
+
+      // TODO: Save token after successful login
+      // await StorageService.saveToken(response.data['token']);
+
+      // Navigate to home
+      Get.offAllNamed(AppRoutes.home);
+    } catch (e) {
+      // Show error message
+      Get.snackbar(
+        'error'.tr,
+        'login_failed'.tr,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Get.theme.colorScheme.error,
+        colorText: Get.theme.colorScheme.onError,
+        duration: Duration(seconds: 3),
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void logout() {

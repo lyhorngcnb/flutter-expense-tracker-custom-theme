@@ -1,6 +1,7 @@
+// ==================== 2. custom_text_field.dart ====================
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final String? label;
   final String? hint;
@@ -17,6 +18,8 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool readOnly;
   final VoidCallback? onTap;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
 
   const CustomTextField({
     Key? key,
@@ -31,39 +34,49 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.maxLines = 1,
     this.maxLength,
-    this.enabled = false,
+    this.enabled = true,
     this.onChanged,
     this.validator,
     this.readOnly = false,
-    this.onTap
-  }): super(key: key);
+    this.onTap,
+    this.focusNode,
+    this.textInputAction,
+  }) : super(key: key);
 
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      maxLines: maxLines,
-      maxLength: maxLength,
-      enabled: enabled,
-      onChanged: onChanged,
-      validator: validator,
-      readOnly: readOnly,
-      onTap: onTap,
+      controller: widget.controller,
+      obscureText: widget.obscureText,
+      keyboardType: widget.keyboardType,
+      maxLines: widget.maxLines,
+      maxLength: widget.maxLength,
+      enabled: widget.enabled,
+      onChanged: widget.onChanged,
+      validator: widget.validator,
+      readOnly: widget.readOnly,
+      onTap: widget.onTap,
+      focusNode: widget.focusNode,
+      textInputAction: widget.textInputAction,
+      cursorColor: Theme.of(context).colorScheme.primary,
+      style: Theme.of(context).textTheme.bodyLarge,
       decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        errorText: errorText,
-        prefixIcon: prefixIcon == null ? Icon(prefixIcon): null,
-        suffixIcon: suffixIcon != null
+        labelText: widget.label,
+        hintText: widget.hint,
+        errorText: widget.errorText,
+        prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+        suffixIcon: widget.suffixIcon != null
             ? IconButton(
-          icon: Icon(suffixIcon),
-          onPressed: onSuffixTap,
+          icon: Icon(widget.suffixIcon),
+          onPressed: widget.onSuffixTap,
         )
             : null,
       ),
-      
     );
   }
 }

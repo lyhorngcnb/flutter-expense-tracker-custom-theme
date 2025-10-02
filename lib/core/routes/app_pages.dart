@@ -1,3 +1,5 @@
+import 'package:expensetracker/features/expense/controllers/expense_controller.dart';
+import 'package:expensetracker/features/expense/views/add_expense_view.dart';
 import 'package:get/get.dart';
 import '../../features/splash/views/splash_view.dart';
 import '../../features/splash/controllers/splash_controller.dart';
@@ -29,5 +31,10 @@ class AppPages {
       name: AppRoutes.settings,
       page: () => SettingsView(),
     ),
+    GetPage(
+        name: AppRoutes.addexpense,
+        page: () => AddExpenseView(),
+      binding: BindingsBuilder(() => Get.put(ExpenseController()))
+    )
   ];
 }
