@@ -1,5 +1,8 @@
 import 'package:expensetracker/features/expense/controllers/expense_controller.dart';
 import 'package:expensetracker/features/expense/views/add_expense_view.dart';
+import 'package:expensetracker/features/transaction/transaction/transaction_controller.dart';
+import 'package:expensetracker/features/transaction/views/transaction_detail_view.dart';
+import 'package:expensetracker/features/transaction/views/transactions_list_view.dart';
 import 'package:get/get.dart';
 import '../../features/splash/views/splash_view.dart';
 import '../../features/splash/controllers/splash_controller.dart';
@@ -35,6 +38,21 @@ class AppPages {
         name: AppRoutes.addexpense,
         page: () => AddExpenseView(),
       binding: BindingsBuilder(() => Get.put(ExpenseController()))
-    )
+    ),
+
+    // Add to app_pages.dart
+    GetPage(
+      name: AppRoutes.transactions,
+      page: () => TransactionsListView(),
+      binding: BindingsBuilder(() => Get.put(TransactionController())),
+    ),
+    GetPage(
+      name: AppRoutes.transactionDetail,
+      page: () => TransactionDetailView(),
+    ),
+    GetPage(
+      name: AppRoutes.editTransaction,
+      page: () => AddExpenseView(), // Reuse AddExpenseView for editing
+    ),
   ];
 }

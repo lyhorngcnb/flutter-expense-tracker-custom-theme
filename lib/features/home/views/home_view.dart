@@ -66,7 +66,7 @@ class HomeView extends StatelessWidget {
                 title: 'recent_transactions'.tr,
                 actionText: 'view_all'.tr,
                 onActionTap: () {
-                  // Navigate to transactions page
+                  Get.toNamed(AppRoutes.transactions);
                 },
               ),
               _buildRecentTransactions(context),

@@ -24,6 +24,10 @@ dependencies:
   # (Optional) Date/time formatting, numbers, currency
   intl: ^0.19.0
 
+  share_plus: ^12.0.0
+  flutter_svg: ^2.0.7
+  flutter_launcher_icons: ^0.14.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -34,6 +38,7 @@ flutter:
 
   assets:
     - assets/lang/
+    - assets/icons/
 
   fonts:
     - family: Inter
@@ -46,3 +51,8 @@ flutter:
         - asset: assets/fonts/KantumruyPro-Regular.ttf
         - asset: assets/fonts/KantumruyPro-Bold.ttf
           weight: 700
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon_2.png"
